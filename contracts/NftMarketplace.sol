@@ -11,6 +11,7 @@ error NotOwner();
 error NotApprovedForMarketplace();
 error NotListed(address nftAddress, uint256 tokenId);
 error PriceNotMet(address nftAddress, uint256 tokenId, uint256 price);
+error NoProceeds();
 
 contract NftMarketplace is ReentrancyGuard {
     struct Listing {
@@ -149,5 +150,18 @@ contract NftMarketplace is ReentrancyGuard {
         }
         s_listings[nftAddress][tokenId].price = newPrice;
         emit ItemListed(msg.sender, nftAddress, tokenId, newPrice);
+    }
+
+    /*
+     * @notice Method for withdrawing proceeds from sales
+     */
+    function withdrawProceeds() external {
+        uint256 proceeds = s_proceeds[msg.sender];
+        if (proceeds <= 0) {
+            revert NoProceeds();
+        }
+        s_proceeds[msg.sender] = 0;
+        (bool success, ) = payable(msg.sender).call{ value: proceeds }("");
+        require(success, "Transfer failed");
     }
 }
