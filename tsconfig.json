@@ -6,8 +6,15 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es6"]
   },
-  "include": ["**/*.ts", "**/.eslintrc.js"],
+  "include": [
+    "**/*.ts",
+    "**/.eslintrc.js",
+    "helper-hardhat-config.js",
+    "deploy/01-deploy-nft-marketplace.js",
+    "helper-hardhat-config.js"
+  ],
   "exclude": ["node_modules"]
 }
