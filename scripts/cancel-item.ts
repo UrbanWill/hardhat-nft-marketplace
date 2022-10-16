@@ -1,5 +1,5 @@
-const { ethers, network } = require("hardhat");
-const { moveBlocks } = require("../utils/move-blocks");
+import { ethers, network } from "hardhat";
+import { moveBlocks } from "../utils/move-blocks";
 import { NftMarketplace, BasicNft } from "../typechain-types";
 
 const TOKEN_ID = 0;
@@ -10,7 +10,7 @@ const cancelItem = async () => {
   const tx = await nftMarketplace.cancelListing(basicNft.address, TOKEN_ID);
   await tx.wait(1);
   console.log("NFT Canceled!");
-  if (network.config.chainId == "31337") {
+  if (network.config.chainId === 31337) {
     await moveBlocks(2, 1000);
   }
 };

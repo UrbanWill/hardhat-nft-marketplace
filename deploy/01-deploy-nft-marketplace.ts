@@ -1,7 +1,7 @@
 import { DeployFunction } from "hardhat-deploy/types";
-const { network } = require("hardhat");
-const { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS } = require("../helper-hardhat-config");
-const { verify } = require("../utils/verify");
+import { network } from "hardhat";
+import { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS } from "../helper-hardhat-config";
+import { verify } from "../utils/verify";
 
 const deployNftMarketplace: DeployFunction = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;

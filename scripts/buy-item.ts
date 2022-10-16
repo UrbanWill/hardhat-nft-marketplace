@@ -13,7 +13,7 @@ const buyItem = async () => {
   const tx = await nftMarketplace.buyItem(basicNft.address, TOKEN_ID, { value: price });
   await tx.wait(1);
   console.log("NFT Bought!");
-  if (network.config.chainId == 31337) {
+  if (network.config.chainId === 31337) {
     await moveBlocks(2, SLEEP_AMOUNT);
   }
 };

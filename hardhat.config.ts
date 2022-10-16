@@ -9,7 +9,7 @@ import "hardhat-gas-reporter";
 import "hardhat-contract-sizer";
 import "@nomiclabs/hardhat-waffle";
 
-require("dotenv").config();
+import "dotenv/config";
 
 /**
  * @type import('hardhat/config').HardhatUserConfig

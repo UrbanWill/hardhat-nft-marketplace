@@ -1,5 +1,5 @@
-const { ethers, network } = require("hardhat");
-const { moveBlocks } = require("../utils/move-blocks");
+import { ethers, network } from "hardhat";
+import { moveBlocks } from "../utils/move-blocks";
 import { BasicNft } from "../typechain-types";
 
 const sleepAmount: number = 1000;
@@ -13,7 +13,7 @@ const mintItem = async () => {
   const tokenId = mintTxReceipt.events[0].args.tokenId;
   console.log(`NFT Minted with id ${tokenId}`);
 
-  if (network.config.chainId == 31337) {
+  if (network.config.chainId === 31337) {
     await moveBlocks(1, sleepAmount);
   }
 };

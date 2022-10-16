@@ -1,7 +1,7 @@
 import { developmentChains } from "../../helper-hardhat-config";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-const { assert, expect } = require("chai");
-const { network, deployments, ethers } = require("hardhat");
+import { assert, expect } from "chai";
+import { network, deployments, ethers } from "hardhat";
 import { NftMarketplace, BasicNft } from "../../typechain-types";
 
 !developmentChains.includes(network.name)
@@ -13,7 +13,7 @@ import { NftMarketplace, BasicNft } from "../../typechain-types";
         basicNftContract: BasicNft;
       const PRICE = ethers.utils.parseEther("0.1");
       const TOKEN_ID = 0;
-      let accounts: SignerWithAddress;
+      let accounts: SignerWithAddress[];
       let deployer: SignerWithAddress;
       let user: SignerWithAddress;
 
@@ -60,8 +60,8 @@ import { NftMarketplace, BasicNft } from "../../typechain-types";
         it("Updates listing with seller and price", async () => {
           await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
           const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID);
-          assert(listing.price.toString() == PRICE.toString());
-          assert(listing.seller.toString() == deployer.address);
+          assert(listing.price.toString() === PRICE.toString());
+          assert(listing.seller.toString() === deployer.address);
         });
       });
 
@@ -86,7 +86,7 @@ import { NftMarketplace, BasicNft } from "../../typechain-types";
             "ItemCanceled",
           );
           const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID);
-          assert(listing.price.toString() == "0");
+          assert(listing.price.toString() === "0");
         });
       });
 
@@ -110,8 +110,8 @@ import { NftMarketplace, BasicNft } from "../../typechain-types";
           ).to.emit("ItemBought");
           const newOwner = await basicNft.ownerOf(TOKEN_ID);
           const deployerProceeds = await nftMarketplace.getProceeds(deployer.address);
-          assert(newOwner.toString() == user.address);
-          assert(deployerProceeds.toString() == PRICE.toString());
+          assert(newOwner.toString() === user.address);
+          assert(deployerProceeds.toString() === PRICE.toString());
         });
       });
 
@@ -133,7 +133,7 @@ import { NftMarketplace, BasicNft } from "../../typechain-types";
             await nftMarketplace.updateListing(basicNft.address, TOKEN_ID, updatedPrice),
           ).to.emit("ItemListed");
           const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID);
-          assert(listing.price.toString() == updatedPrice.toString());
+          assert(listing.price.toString() === updatedPrice.toString());
         });
       });
 

@@ -1,4 +1,4 @@
-const { network } = require("hardhat");
+import { network } from "hardhat";
 
 export const sleep = (timeInMs: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, timeInMs));

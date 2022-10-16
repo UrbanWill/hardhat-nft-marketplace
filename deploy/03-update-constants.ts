@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { contractsAddressesFile, contractsAbisFile } from "../helper-hardhat-config";
 import { ethers, network } from "hardhat";
 import { readFileSync, writeFileSync } from "fs";
