@@ -33,7 +33,7 @@ const frontEndContractsFile2 =
 const frontEndAbiLocation = "../nextjs-nft-marketplace-moralis-fcc/constants/";
 const frontEndAbiLocation2 = "../nextjs-nft-marketplace-thegraph-fcc/constants/";
 
-module.exports = {
+export {
   networkConfig,
   developmentChains,
   VERIFICATION_BLOCK_CONFIRMATIONS,
