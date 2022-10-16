@@ -14,7 +14,10 @@
     "**/.eslintrc.js",
     "helper-hardhat-config.ts",
     "deploy/01-deploy-nft-marketplace.ts",
-    "helper-hardhat-config.ts"
+    "helper-hardhat-config.ts",
+    "./scripts",
+    "./test",
+    "./typechain-types"
   ],
   "exclude": ["node_modules"]
 }

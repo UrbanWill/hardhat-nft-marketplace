@@ -2,11 +2,15 @@ import { developmentChains } from "../../helper-hardhat-config";
 import type { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 const { assert, expect } = require("chai");
 const { network, deployments, ethers } = require("hardhat");
+import { NftMarketplace, BasicNft } from "../../typechain-types";
 
 !developmentChains.includes(network.name)
   ? describe.skip
   : describe("Nft Marketplace Unit Tests", () => {
-      let nftMarketplace, nftMarketplaceContract, basicNft, basicNftContract;
+      let nftMarketplace: NftMarketplace,
+        nftMarketplaceContract: NftMarketplace,
+        basicNft: BasicNft,
+        basicNftContract: BasicNft;
       const PRICE = ethers.utils.parseEther("0.1");
       const TOKEN_ID = 0;
       let accounts: SignerWithAddress;

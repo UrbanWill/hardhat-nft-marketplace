@@ -36,18 +36,13 @@ yarn-error.log*
 # vercel
 .vercel
 
-.env 
+.env
 artifacts
-cache 
-coverage.json 
+cache
+coverage.json
 
-front-end/node_modules
 frp
 frpc.ini
-front-end/testMoralis.html
-front-end-typescript/node_modules
-front-end-typescript/nft-marketplace-graph/node_modules
-front-end/nft-marketplace-graph/node_modules
 deployments
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -89,7 +84,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-front-end-typescript/.next
-front-end-typescript/node_modules
-front-end-typescript/graph-nft-marketplace/node_modules
 typechain-types
