@@ -28,14 +28,12 @@ const networkConfig = {
 const developmentChains = ["hardhat", "localhost"];
 const VERIFICATION_BLOCK_CONFIRMATIONS = 6;
 const contractsAddressesFile = "./constants/contractAddresses.json";
-const frontEndAbiLocation = "../nextjs-nft-marketplace-moralis-fcc/constants/";
-const frontEndAbiLocation2 = "../nextjs-nft-marketplace-thegraph-fcc/constants/";
+const contractsAbisFile = "./constants/abis/";
 
 export {
   networkConfig,
   developmentChains,
   VERIFICATION_BLOCK_CONFIRMATIONS,
   contractsAddressesFile,
-  frontEndAbiLocation,
-  frontEndAbiLocation2,
+  contractsAbisFile,
 };
