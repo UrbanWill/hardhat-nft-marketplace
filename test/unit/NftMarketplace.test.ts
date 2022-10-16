@@ -110,4 +110,26 @@ const { network, deployments, ethers } = require("hardhat");
           assert(deployerProceeds.toString() == PRICE.toString());
         });
       });
+
+      describe("updateListing", () => {
+        it("must be owner and listed", async () => {
+          await expect(
+            nftMarketplace.updateListing(basicNft.address, TOKEN_ID, PRICE),
+          ).to.be.revertedWith("NotListed");
+          await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
+          nftMarketplace = nftMarketplaceContract.connect(user);
+          await expect(
+            nftMarketplace.updateListing(basicNft.address, TOKEN_ID, PRICE),
+          ).to.be.revertedWith("NotOwner");
+        });
+        it("updates the price of the item", async () => {
+          const updatedPrice = ethers.utils.parseEther("0.2");
+          await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
+          expect(
+            await nftMarketplace.updateListing(basicNft.address, TOKEN_ID, updatedPrice),
+          ).to.emit("ItemListed");
+          const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID);
+          assert(listing.price.toString() == updatedPrice.toString());
+        });
+      });
     });
