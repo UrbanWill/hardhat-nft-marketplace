@@ -12,9 +12,9 @@
   "include": [
     "**/*.ts",
     "**/.eslintrc.js",
-    "helper-hardhat-config.js",
-    "deploy/01-deploy-nft-marketplace.js",
-    "helper-hardhat-config.js"
+    "helper-hardhat-config.ts",
+    "deploy/01-deploy-nft-marketplace.ts",
+    "helper-hardhat-config.ts"
   ],
   "exclude": ["node_modules"]
 }

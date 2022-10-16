@@ -3,7 +3,7 @@ const { network } = require("hardhat");
 const { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
 
-const func: DeployFunction = async ({ getNamedAccounts, deployments }) => {
+const deployFunctionNftMarketplace: DeployFunction = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
   const waitBlockConfirmations = developmentChains.includes(network.name)
@@ -27,6 +27,6 @@ const func: DeployFunction = async ({ getNamedAccounts, deployments }) => {
   log("----------------------------------------------------");
 };
 
-func.tags = ["all", "nftmarketplace"];
+deployFunctionNftMarketplace.tags = ["all", "nftmarketplace"];
 
-export default func;
+export default deployFunctionNftMarketplace;
