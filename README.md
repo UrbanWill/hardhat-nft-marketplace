@@ -6,3 +6,7 @@
 
 3- Open another terminal
 4- run `yarn hardhat run scripts/{script_name}.ts --network localhost`
+
+## Hot to run an specific deploy script using tags
+
+`yarn hardhat deploy --network localhost --tags {tag_name}`
