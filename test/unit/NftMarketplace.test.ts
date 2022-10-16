@@ -27,7 +27,7 @@ const { network, deployments, ethers } = require("hardhat");
         await basicNft.approve(nftMarketplaceContract.address, TOKEN_ID);
       });
 
-      describe("listItem", function () {
+      describe("listItem", () => {
         it("emits an event after listing an item", async () => {
           expect(await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE)).to.emit(
             "ItemListed",
@@ -60,6 +60,29 @@ const { network, deployments, ethers } = require("hardhat");
           assert(listing.seller.toString() == deployer.address);
         });
       });
-    });
 
-// export {}
+      describe("cancelListing", () => {
+        it("reverts if there is no listing", async () => {
+          const error = `NotListed("${basicNft.address}", ${TOKEN_ID})`;
+          await expect(nftMarketplace.cancelListing(basicNft.address, TOKEN_ID)).to.be.revertedWith(
+            error,
+          );
+        });
+        it("reverts if anyone but the owner tries to call", async () => {
+          await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
+          nftMarketplace = nftMarketplaceContract.connect(user);
+          await basicNft.approve(user.address, TOKEN_ID);
+          await expect(nftMarketplace.cancelListing(basicNft.address, TOKEN_ID)).to.be.revertedWith(
+            "NotOwner",
+          );
+        });
+        it("emits event and removes listing", async () => {
+          await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
+          expect(await nftMarketplace.cancelListing(basicNft.address, TOKEN_ID)).to.emit(
+            "ItemCanceled",
+          );
+          const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID);
+          assert(listing.price.toString() == "0");
+        });
+      });
+    });
