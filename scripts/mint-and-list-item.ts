@@ -19,7 +19,7 @@ async function mintAndList() {
   console.log("Listing NFT...");
   const tx = await nftMarketplace.listItem(basicNft.address, tokenId, PRICE);
   await tx.wait(1);
-  console.log("NFT Listed!");
+  console.log(`NFT Listed! with id ${tokenId}`);
   if (network.config.chainId == 31337) {
     await moveBlocks(1, sleepAmount);
   }
