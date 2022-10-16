@@ -5,7 +5,7 @@ import { NftMarketplace, BasicNft } from "../typechain-types";
 const TOKEN_ID = 0;
 const SLEEP_AMOUNT = 1000;
 
-async function buyItem() {
+const buyItem = async () => {
   const nftMarketplace: NftMarketplace = await ethers.getContract("NftMarketplace");
   const basicNft: BasicNft = await ethers.getContract("BasicNft");
   const listing = await nftMarketplace.getListing(basicNft.address, TOKEN_ID);
@@ -16,7 +16,7 @@ async function buyItem() {
   if (network.config.chainId == 31337) {
     await moveBlocks(2, SLEEP_AMOUNT);
   }
-}
+};
 
 buyItem()
   .then(() => process.exit(0))
