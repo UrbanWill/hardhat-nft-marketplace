@@ -132,4 +132,29 @@ const { network, deployments, ethers } = require("hardhat");
           assert(listing.price.toString() == updatedPrice.toString());
         });
       });
+
+      describe("withdrawProceeds", () => {
+        it("doesn't allow 0 proceed withdrawls", async () => {
+          await expect(nftMarketplace.withdrawProceeds()).to.be.revertedWith("NoProceeds");
+        });
+        it("withdraws proceeds", async () => {
+          await nftMarketplace.listItem(basicNft.address, TOKEN_ID, PRICE);
+          nftMarketplace = nftMarketplaceContract.connect(user);
+          await nftMarketplace.buyItem(basicNft.address, TOKEN_ID, { value: PRICE });
+          nftMarketplace = nftMarketplaceContract.connect(deployer);
+
+          const deployerProceedsBefore = await nftMarketplace.getProceeds(deployer.address);
+          const deployerBalanceBefore = await deployer.getBalance();
+          const txResponse = await nftMarketplace.withdrawProceeds();
+          const transactionReceipt = await txResponse.wait(1);
+          const { gasUsed, effectiveGasPrice } = transactionReceipt;
+          const gasCost = gasUsed.mul(effectiveGasPrice);
+          const deployerBalanceAfter = await deployer.getBalance();
+
+          assert(
+            deployerBalanceAfter.add(gasCost).toString() ==
+              deployerProceedsBefore.add(deployerBalanceBefore).toString(),
+          );
+        });
+      });
     });
