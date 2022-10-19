@@ -16,3 +16,6 @@ run `yarn hardhat deploy --network localhost --tags {tag_name}`
 
 run `yarn hardhat test`
 run `yarn hardhat coverage`
+
+## How to deploy
+run `yarn hardhat deploy --network {chosen_network}`
