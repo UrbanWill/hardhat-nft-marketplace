@@ -1,7 +1,7 @@
 import { DeployFunction } from "hardhat-deploy/types";
 import { network } from "hardhat";
 import { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS } from "../helper-hardhat-config";
-import { verify } from "../utils/verify";
+import verify from "../utils/verify";
 
 const deployBasicNft: DeployFunction = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
