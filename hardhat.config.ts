@@ -3,6 +3,7 @@ import "hardhat-deploy";
 import "@typechain/hardhat";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
 
 import "solidity-coverage";
 import "hardhat-gas-reporter";
@@ -53,6 +54,7 @@ const config: HardhatUserConfig = {
       //   accounts: {
       //     mnemonic: MNEMONIC,
       //   },
+
       saveDeployments: true,
       chainId: 5,
     },
@@ -96,6 +98,16 @@ const config: HardhatUserConfig = {
         version: "0.4.24",
       },
     ],
+  },
+  etherscan: {
+    apiKey: {
+      // ethereum
+      mainnet: ETHERSCAN_API_KEY,
+      goerli: ETHERSCAN_API_KEY,
+      // polygon
+      polygon: POLYGONSCAN_API_KEY,
+      polygonMumbai: POLYGONSCAN_API_KEY,
+    },
   },
   mocha: {
     timeout: 200000, // 200 seconds max for running tests
