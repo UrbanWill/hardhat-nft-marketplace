@@ -3,6 +3,7 @@
 ## How to run scripts
 
 1- Open a terminal
+
 2- Run `yarn hardhat node`
 
 3- Open another terminal
@@ -18,4 +19,4 @@ run `yarn hardhat test`
 run `yarn hardhat coverage`
 
 ## How to deploy
-run `yarn hardhat deploy --network {chosen_network}`
+run `yarn hardhat deploy --network {network_name}`
