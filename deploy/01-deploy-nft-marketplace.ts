@@ -3,6 +3,8 @@ import { network } from "hardhat";
 import { developmentChains, VERIFICATION_BLOCK_CONFIRMATIONS } from "../helper-hardhat-config";
 import verify from "../utils/verify";
 
+const TRUSTED_FORWARDER_MUMBAI = "0x69015912AA33720b842dCD6aC059Ed623F28d9f7";
+
 const deployNftMarketplace: DeployFunction = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
   const { deployer } = await getNamedAccounts();
@@ -11,7 +13,7 @@ const deployNftMarketplace: DeployFunction = async ({ getNamedAccounts, deployme
     : VERIFICATION_BLOCK_CONFIRMATIONS;
 
   log("----------------------------------------------------");
-  const args = [];
+  const args = [TRUSTED_FORWARDER_MUMBAI];
   const nftMarketplace = await deploy("NftMarketplace", {
     from: deployer,
     args,
