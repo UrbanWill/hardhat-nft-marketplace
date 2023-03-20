@@ -25,12 +25,19 @@ const updateAbis = async () => {
     `${contractsAbisFile}BasicNft.json`,
     basicNft.interface.format(ethers.utils.FormatTypes.json) as string,
   );
+
+  const setQuote = await ethers.getContract("SetQuote");
+  writeFileSync(
+    `${contractsAbisFile}SetQuote.json`,
+    setQuote.interface.format(ethers.utils.FormatTypes.json) as string,
+  );
 };
 
 const updateContractAddresses = async () => {
   const chainId = network.config.chainId.toString();
   const nftMarketplace = await ethers.getContract("NftMarketplace");
   const basicNft = await ethers.getContract("BasicNft");
+  const setQuote = await ethers.getContract("SetQuote");
   const contractAddresses = JSON.parse(readFileSync(contractsAddressesFile, "utf8"));
   if (chainId in contractAddresses) {
     if (!contractAddresses[chainId]["NftMarketplace"].includes(nftMarketplace.address)) {
@@ -39,9 +46,13 @@ const updateContractAddresses = async () => {
     if (!contractAddresses[chainId]["BasicNft"]?.includes(basicNft.address)) {
       contractAddresses[chainId]["BasicNft"].push(basicNft.address);
     }
+    if (!contractAddresses[chainId]["SetQuote"]?.includes(setQuote.address)) {
+      contractAddresses[chainId]["SetQuote"].push(setQuote.address);
+    }
   } else {
     contractAddresses[chainId] = { NftMarketplace: [nftMarketplace.address] };
     contractAddresses[chainId] = { BasicNft: [basicNft.address] };
+    contractAddresses[chainId] = { SetQuote: [setQuote.address] };
   }
   writeFileSync(contractsAddressesFile, JSON.stringify(contractAddresses));
 };

@@ -1,0 +1,74 @@
+[
+  {
+    "type": "event",
+    "anonymous": false,
+    "name": "MetaTransactionExecuted",
+    "inputs": [
+      { "type": "address", "name": "userAddress", "indexed": false },
+      { "type": "address", "name": "relayerAddress", "indexed": false },
+      { "type": "bytes", "name": "functionSignature", "indexed": false }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "executeMetaTransaction",
+    "constant": false,
+    "stateMutability": "payable",
+    "payable": true,
+    "inputs": [
+      { "type": "address", "name": "userAddress" },
+      { "type": "bytes", "name": "functionSignature" },
+      { "type": "bytes32", "name": "sigR" },
+      { "type": "bytes32", "name": "sigS" },
+      { "type": "uint8", "name": "sigV" }
+    ],
+    "outputs": [{ "type": "bytes" }]
+  },
+  {
+    "type": "function",
+    "name": "getNonce",
+    "constant": true,
+    "stateMutability": "view",
+    "payable": false,
+    "inputs": [{ "type": "address", "name": "user" }],
+    "outputs": [{ "type": "uint256", "name": "nonce" }]
+  },
+  {
+    "type": "function",
+    "name": "getQuote",
+    "constant": true,
+    "stateMutability": "view",
+    "payable": false,
+    "inputs": [],
+    "outputs": [
+      { "type": "string", "name": "currentQuote" },
+      { "type": "address", "name": "currentOwner" }
+    ]
+  },
+  {
+    "type": "function",
+    "name": "owner",
+    "constant": true,
+    "stateMutability": "view",
+    "payable": false,
+    "inputs": [],
+    "outputs": [{ "type": "address" }]
+  },
+  {
+    "type": "function",
+    "name": "quote",
+    "constant": true,
+    "stateMutability": "view",
+    "payable": false,
+    "inputs": [],
+    "outputs": [{ "type": "string" }]
+  },
+  {
+    "type": "function",
+    "name": "setQuote",
+    "constant": false,
+    "payable": false,
+    "inputs": [{ "type": "string", "name": "newQuote" }],
+    "outputs": []
+  }
+]
